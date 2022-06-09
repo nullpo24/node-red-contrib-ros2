@@ -13,7 +13,7 @@
     "keywords": [
         "node-red"
     ],
-    "author": "Y Onishi",
+    "author": "nullpo24",
     "node-red": {
         "nodes": {
             "ros2": "ros2.js"
