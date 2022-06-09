@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ros2-publish',{
+        category: 'network',
+        color: '#d6cafa',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:0,
+        align: 'right',
+        paletteLabel: 'ros2 pub',
+        icon: "icon.png",
+        label: function() {
+            return this.name||"ros2-publish";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ros2-publish">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ros2-publish">
+    <p>A simple node that converts the message payloads into all ros2 characters</p>
+</script>
+
+<script type="text/javascript">
+    RED.nodes.registerType('ros2-subscribe',{
+        category: 'network',
+        color: '#d6cafa',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:0,
+        outputs:1,
+        paletteLabel: 'ros2 sub',
+        icon: "icon.png",
+        label: function() {
+            return this.name||"ros2-subscribe";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ros2-subscribe">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ros2-subscribe">
+    <p>A simple node that converts the message payloads into all ros2 characters</p>
+</script>
