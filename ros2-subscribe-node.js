@@ -1,22 +1,21 @@
 module.exports = function(RED) {
-    return function (config) {
-      const rclnodejs = require('rclnodejs');
-  
-      RED.nodes.createNode(this,config);
-      var node = this;
+  return function (config) {
+        
+    RED.nodes.createNode(this,config);
+    var node = this;
 
-      rclnodejs.init().then(() => {
-        const rclnode = rclnodejs.createNode('subscription_example_node');
+    node.server = RED.nodes.getNode(config.server);
 
-        rclnode.createSubscription('std_msgs/msg/String', 'chatter', (data) => {
-          node.send({payload: data});
-        });
+    node.server.on('ros2 connected', () =>{
+      var rclnodejs = node.server.rclnodejs;
+      const rclnode = rclnodejs.createNode(node.server.nodename);
 
-        rclnodejs.spin(rclnode);
+      rclnode.createSubscription('std_msgs/msg/String', node.server.topicname, (data) => {
+        node.send({payload: data});
       });
 
-      node.on("close", function() {
-        rclnodejs.shutdownAll();
-      });
-    }
+      rclnodejs.spin(rclnode);
+    });
+
+  }
 }

@@ -1,6 +1,6 @@
 {
     "name": "node-red-contrib-ros2",
-    "version": "0.1.8",
+    "version": "1.0.0",
     "description": "A sample node for node-red to convert lower case",
     "repository": {
         "type": "git",
@@ -19,5 +19,5 @@
             "ros2": "ros2.js"
         }
     },
-    "license": "MIT"
+    "license": "Apache-2.0"
 }

@@ -1,26 +1,22 @@
 module.exports = function(RED) {
-    return function (config) {
-        const rclnodejs = require('rclnodejs');
+  return function (config) {
 
-        RED.nodes.createNode(this,config);
-        var node = this;
+    RED.nodes.createNode(this,config);
+    var node = this;
 
-        rclnodejs.init().then(() => {
-            const rclnode = rclnodejs.createNode('publisher_example_node');
-            const publisher = rclnode.createPublisher('std_msgs/msg/String', 'topic');
+    node.server = RED.nodes.getNode(config.server);
 
-            this.on('input', function(msg) {
-                node.warn(msg);
-                // publisher.publish(msg);
-                publisher.publish('hello world!');
-                // msg.payload = msg.payload.toRos2();
-            });
+    node.server.on('ros2 connected', () =>{
+      var rclnodejs = node.server.rclnodejs;  
+      const rclnode = rclnodejs.createNode(node.server.nodename);
+      const publisher = rclnode.createPublisher('std_msgs/msg/String', node.server.topicname);
 
-            rclnodejs.spin(rclnode);
-        });
+      this.on('input', function(msg) {
+        publisher.publish(msg.payload);
+      });
 
-        node.on("close", function() {
-          rclnodejs.shutdownAll();
-        });
-    }
+      rclnodejs.spin(rclnode);
+    });
+
+  }
 }

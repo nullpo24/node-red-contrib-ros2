@@ -1,8 +1,22 @@
+<!-- ros2 publisher -->
+<script type="text/html" data-template-name="ros2-publish">
+    <div class="form-row">
+        <label for="node-input-server"><i class="fa fa-user"></i> Server</label>
+        <input type="text" id="node-input-server">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="ros2-publish">
+    <p>A simple node that converts the message payloads into all ros2 characters</p>
+</script>
+
+
 <script type="text/javascript">
     RED.nodes.registerType('ros2-publish',{
         category: 'network',
         color: '#d6cafa',
         defaults: {
+            server: {type:"ros2-server"},
             name: {value:""}
         },
         inputs:1,
@@ -16,14 +30,15 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="ros2-publish">
+<!-- ros2 subscriber -->
+<script type="text/html" data-template-name="ros2-subscribe">
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <label for="node-input-server"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-server" placeholder="Name">
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="ros2-publish">
+<script type="text/html" data-help-name="ros2-subscribe">
     <p>A simple node that converts the message payloads into all ros2 characters</p>
 </script>
 
@@ -32,6 +47,7 @@
         category: 'network',
         color: '#d6cafa',
         defaults: {
+            server: {type:"ros2-server"},
             name: {value:""}
         },
         inputs:0,
@@ -44,13 +60,31 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="ros2-subscribe">
-    <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+<!-- ros2 server -->
+<script type="text/javascript">
+    RED.nodes.registerType('ros2-server',{
+        category: 'config',
+        defaults: {
+            name: {value:""},
+            nodename: {value:"example_node", required:true},
+            topicname: {value:"chatter",required:true},
+        },
+        label: function() {
+            return this.url;
+        }
+    });
 </script>
 
-<script type="text/x-red" data-help-name="ros2-subscribe">
-    <p>A simple node that converts the message payloads into all ros2 characters</p>
+<script type="text/html" data-template-name="ros2-server">
+    <div class="form-row">
+        <label for="node-config-input-url">Url</label>
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-nodename">Node Name</label>
+        <input type="text" id="node-config-input-nodename">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-topicname"><i class="fa fa-bookmark"></i> Topic Name</label>
+        <input type="text" id="node-config-input-topicname">
+    </div>
 </script>
