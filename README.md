@@ -1,2 +1,8 @@
 # node-red-contrib-ros2
-Not working Experimental
+
+## Installation
+
+```
+$ cd ~/.node-red
+$ npm install ~/<path-to-dir>/node-red-contribode-red-contrib-ros2
+```
